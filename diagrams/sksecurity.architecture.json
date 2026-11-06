@@ -1,0 +1,445 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "SKSecurity Component Map",
+    "subtitle": "Entry points, core engine, local data stores, and optional SKWorld peers. Derived from smilinTux/sksecurity docs/ARCHITECTURE.md and README.md.",
+    "output": "sksecurity.architecture.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "cli",
+      "type": "frontend",
+      "label": "sksecurity CLI",
+      "sublabel": "cli.py (click)",
+      "pos": [
+        60,
+        40
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "mcp",
+      "type": "frontend",
+      "label": "MCP server",
+      "sublabel": "mcp_server.py (stdio)",
+      "pos": [
+        280,
+        40
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "api",
+      "type": "frontend",
+      "label": "Python API",
+      "sublabel": "__init__.py",
+      "pos": [
+        500,
+        40
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "dashboard",
+      "type": "frontend",
+      "label": "Web dashboard",
+      "sublabel": "dashboard.py, optional",
+      "pos": [
+        720,
+        40
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "scanner",
+      "type": "backend",
+      "label": "Threat scanner",
+      "sublabel": "scanner.py",
+      "pos": [
+        60,
+        280
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "secretguard",
+      "type": "backend",
+      "label": "Secret guard",
+      "sublabel": "secret_guard.py",
+      "pos": [
+        280,
+        280
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "screener",
+      "type": "backend",
+      "label": "Input screener",
+      "sublabel": "email_screener.py",
+      "pos": [
+        500,
+        280
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "monitor",
+      "type": "backend",
+      "label": "Runtime monitor",
+      "sublabel": "monitor.py",
+      "pos": [
+        720,
+        280
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "intel",
+      "type": "backend",
+      "label": "Threat intelligence",
+      "sublabel": "intelligence.py",
+      "pos": [
+        60,
+        520
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "quarantine",
+      "type": "backend",
+      "label": "Quarantine manager",
+      "sublabel": "quarantine.py",
+      "pos": [
+        280,
+        520
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "kms",
+      "type": "security",
+      "label": "Sovereign KMS",
+      "sublabel": "kms.py",
+      "pos": [
+        500,
+        520
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "truth",
+      "type": "backend",
+      "label": "Truth engine",
+      "sublabel": "truth_engine.py",
+      "pos": [
+        720,
+        520
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "Local data stores",
+      "sublabel": "~/.sksecurity: DB, keys, quarantine/",
+      "pos": [
+        280,
+        760
+      ],
+      "size": [
+        400,
+        70
+      ]
+    },
+    {
+      "id": "outputs",
+      "type": "external",
+      "label": "Reports + exit code",
+      "sublabel": "PDF / JSON / CI gate",
+      "pos": [
+        720,
+        760
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "skmodel",
+      "type": "external",
+      "label": "skmodel (optional)",
+      "sublabel": "Ollama / OpenAI-compatible",
+      "pos": [
+        60,
+        1000
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "capauth",
+      "type": "external",
+      "label": "capauth (optional)",
+      "sublabel": "identity / PGP seal",
+      "pos": [
+        280,
+        1000
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "skseed",
+      "type": "external",
+      "label": "skseed (optional)",
+      "sublabel": "Steel Man Collider",
+      "pos": [
+        500,
+        1000
+      ],
+      "size": [
+        180,
+        70
+      ]
+    },
+    {
+      "id": "skcapstone",
+      "type": "external",
+      "label": "skcapstone (optional)",
+      "sublabel": "fleet + sk-alert bus",
+      "pos": [
+        720,
+        1000
+      ],
+      "size": [
+        180,
+        70
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Entry points",
+      "wraps": [
+        "cli",
+        "mcp",
+        "api",
+        "dashboard"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Core security engine",
+      "wraps": [
+        "scanner",
+        "secretguard",
+        "screener",
+        "monitor",
+        "intel",
+        "quarantine",
+        "kms",
+        "truth"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Local data + outputs",
+      "wraps": [
+        "db",
+        "outputs"
+      ]
+    },
+    {
+      "kind": "security-group",
+      "label": "Optional SKWorld peers (soft imports)",
+      "wraps": [
+        "skmodel",
+        "capauth",
+        "skseed",
+        "skcapstone"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "cli-scanner",
+      "from": "cli",
+      "to": "scanner",
+      "variant": "default"
+    },
+    {
+      "id": "mcp-secretguard",
+      "from": "mcp",
+      "to": "secretguard",
+      "variant": "default"
+    },
+    {
+      "id": "api-screener",
+      "from": "api",
+      "to": "screener",
+      "variant": "default"
+    },
+    {
+      "id": "dashboard-monitor",
+      "from": "dashboard",
+      "to": "monitor",
+      "variant": "default"
+    },
+    {
+      "id": "intel-scanner",
+      "from": "intel",
+      "to": "scanner",
+      "label": "IOC feed",
+      "variant": "default"
+    },
+    {
+      "id": "scanner-quarantine",
+      "from": "scanner",
+      "to": "quarantine",
+      "label": "over threshold",
+      "variant": "emphasis"
+    },
+    {
+      "id": "secretguard-kms",
+      "from": "secretguard",
+      "to": "kms",
+      "label": "seal findings",
+      "variant": "security"
+    },
+    {
+      "id": "truth-screener",
+      "from": "truth",
+      "to": "screener",
+      "label": "verify verdict",
+      "variant": "dashed"
+    },
+    {
+      "id": "scanner-db",
+      "from": "scanner",
+      "to": "db",
+      "variant": "default"
+    },
+    {
+      "id": "secretguard-db",
+      "from": "secretguard",
+      "to": "db",
+      "variant": "default"
+    },
+    {
+      "id": "screener-db",
+      "from": "screener",
+      "to": "db",
+      "variant": "default"
+    },
+    {
+      "id": "monitor-db",
+      "from": "monitor",
+      "to": "db",
+      "variant": "default"
+    },
+    {
+      "id": "quarantine-db",
+      "from": "quarantine",
+      "to": "db",
+      "variant": "default"
+    },
+    {
+      "id": "kms-db",
+      "from": "kms",
+      "to": "db",
+      "label": "sealed key hierarchy",
+      "variant": "security"
+    },
+    {
+      "id": "db-outputs",
+      "from": "db",
+      "to": "outputs",
+      "label": "PDF / text / exit code",
+      "variant": "default"
+    },
+    {
+      "id": "scanner-skmodel",
+      "from": "scanner",
+      "to": "skmodel",
+      "label": "optional: verdict explanation",
+      "variant": "dashed"
+    },
+    {
+      "id": "kms-capauth",
+      "from": "kms",
+      "to": "capauth",
+      "label": "optional: seal via PGP identity",
+      "variant": "dashed"
+    },
+    {
+      "id": "truth-skseed",
+      "from": "truth",
+      "to": "skseed",
+      "label": "optional: adversarial verify",
+      "variant": "dashed"
+    },
+    {
+      "id": "scanner-skcapstone",
+      "from": "scanner",
+      "to": "skcapstone",
+      "label": "optional, by package presence",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Local-first, zero hard deps",
+      "items": [
+        "No skcapstone import in sksecurity's own source; every SKWorld peer link above is a soft, optional import",
+        "All findings, quarantine records, and KMS keys stay under ~/.sksecurity, nothing phones home",
+        "Four entry points (CLI, MCP, API, dashboard) share one core engine and one local data layer"
+      ]
+    }
+  ]
+}
