@@ -2,7 +2,7 @@
   "repo": "smilinTux/sksecurity",
   "branch": "main",
   "path": "docs",
-  "generated": "2026-11-10",
+  "generated": "2026-11-11",
   "note": "Committed fallback for the /docs viewer when the GitHub Contents API is unavailable or rate-limited. Regenerate from: python docs-manifest-gen.py smilinTux/sksecurity --out docs-manifest.json",
   "docs": [
     {
@@ -16,10 +16,6 @@
     {
       "name": "QUANTUM_RESISTANCE.md",
       "title": "SKSecurity — Quantum-Resistance: Crypto Inventory & Runtime Self-Report"
-    },
-    {
-      "name": "SKSENTRY.md",
-      "title": "SKSentry — Crowdsourced AI Threat Intelligence"
     },
     {
       "name": "audit-2026-06-28.md",
