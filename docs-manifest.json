@@ -2,12 +2,16 @@
   "repo": "smilinTux/sksecurity",
   "branch": "main",
   "path": "docs",
-  "generated": "2026-11-11",
+  "generated": "2026-11-12",
   "note": "Committed fallback for the /docs viewer when the GitHub Contents API is unavailable or rate-limited. Regenerate from: python docs-manifest-gen.py smilinTux/sksecurity --out docs-manifest.json",
   "docs": [
     {
       "name": "ARCHITECTURE.md",
       "title": "SKSecurity Architecture"
+    },
+    {
+      "name": "EVALUATION-2026-11.md",
+      "title": "sksecurity evaluation, 2026-11"
     },
     {
       "name": "INFERENCE-GATEWAY.md",
